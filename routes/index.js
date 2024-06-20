@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const pg = require('pg');
-
 const connection = new pg.Pool({
   host: 'localhost',
   user: 'root',
@@ -34,7 +33,7 @@ router.post('/', function (req, res, next) {
   });
 
   const todo = req.body.add;
-  onnection.query(
+  connection.query(
     `insert into tasks (user_id, content) values (1, '${todo}');`,
     (error, results) => {
       console.log(error);
