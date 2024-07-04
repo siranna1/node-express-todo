@@ -3,6 +3,10 @@ const router = express.Router();
 const knex = require('../db/knex');
 
 router.get('/', function (req, res, next) {
+  const userId = req.session.userid;
+  const isAuth = Boolean(userId);
+  console.log(`isAuth: ${isAuth}`);
+  
   knex("tasks")
     .select("*")
     .then(function (results) {
@@ -21,6 +25,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+  const userId = req.session.userid;
+  const isAuth = Boolean(userId);
   const todo = req.body.add;
   knex("tasks")
     .insert({user_id: 1, content: todo})
@@ -37,5 +43,6 @@ router.post('/', function (req, res, next) {
 
 router.use('/signup', require('./signup'));
 router.use('/signin', require('./signin'));
+router.use('/logout', require('./logout'));
 
 module.exports = router;

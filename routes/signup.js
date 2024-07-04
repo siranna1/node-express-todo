@@ -12,7 +12,8 @@ router.post('/', function (req, res, next) {
   const username = req.body.username;
   const password = req.body.password;
   const repassword = req.body.repassword;
-
+  
+  console.log(knex("users").select("logger"))
   knex("users")
     .where({name: username})
     .select("*")
