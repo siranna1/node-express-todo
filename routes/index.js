@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 
-
 router.get('/', function (req, res, next) {
   knex("tasks")
     .select("*")
@@ -37,5 +36,6 @@ router.post('/', function (req, res, next) {
 });
 
 router.use('/signup', require('./signup'));
+router.use('/signin', require('./signin'));
 
 module.exports = router;
