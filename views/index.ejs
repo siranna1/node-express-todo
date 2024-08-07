@@ -4,12 +4,35 @@
   <title><%= title %></title>
  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <style>
+    table {
+    width:100%;
+    border-collapse: collapse;
+    }
+    th {
+      padding: 10px;
+      padding-left: 20px;
+      border-bottom: solid 5px #7fffd4;
+    }
+    td {
+      padding: 10px;
+      padding-left: 20px;
+      border-bottom: solid 1px #7fffd4;
+    }
+    h2{
+      text-align: center;
+      padding:30px;
+    }
+  </style>
 </head>
 
 <body>
   <%- include('./header'); %>
  <%- include('./error_messages'); %>
+
 <% if(isAuth) { %>
+  <H2>ようこそ<%= n %>さん</H2>
   <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -20,11 +43,18 @@
       </form>
     </div>
     <div class="col-md-6">
-      <ul>
-        <% for(let todo of todos){ %>
-          <li><span><%= todo.content %></span></li>
-        <% } %>
-      </ul>
+      <table>
+        <tr>
+          <th>タスク</th>
+          <th>ユーザー名</th>
+        </tr>
+        
+          <% for(let todo of todos){ %>
+            <tr>
+            <td><span><%= todo.content %></span></td><td><span><%= taiou[todo.user_id] %> </span></td>
+            </tr>
+          <% } %>
+      </table>
     </div>
   </div>
 </div>
