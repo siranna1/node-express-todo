@@ -10,6 +10,7 @@
   <%- include('./header'); %>
  <%- include('./error_messages'); %>
 <% if(isAuth) { %>
+  <H1>ようこそ<%= name %>さん</H1>
   <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -20,9 +21,10 @@
       </form>
     </div>
     <div class="col-md-6">
+      <!-- <%= test %> -->
       <ul>
         <% for(let todo of todos){ %>
-          <li><span><%= todo.content %></span></li>
+          <li><span><%= todo.content %><!-- <%= name %>さん--></span></li>
         <% } %>
       </ul>
     </div>

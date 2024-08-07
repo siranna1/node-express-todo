@@ -32,7 +32,7 @@ router.post('/', function (req, res, next) {
         knex("users")
           .insert({name: username, password: hashedPassword})
           .then(function () {
-            res.redirect("/");
+            res.redirect("/signin");
           })
           .catch(function (err) {
             console.error(err);

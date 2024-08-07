@@ -1,19 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
+const User = require("../models/user");
 
-router.get('/', function (req, res, next) {
+ router.get('/', async function (req, res, next) {
+  
   const isAuth = req.isAuthenticated();
   if (isAuth) {
     const userId = req.user.id;
+    const user = await User.findById(userId);
+
     knex("tasks")
       .select("*")
       .where({user_id: userId})
       .then(function (results) {
+        
         res.render('index', {
           title: 'ToDo App',
           todos: results,
           isAuth: isAuth,
+          name: req.user.name, 
+          test: user.name,
         });
       })
       .catch(function (err) {
