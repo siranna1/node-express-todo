@@ -9,18 +9,30 @@ const User = require("../models/user");
   if (isAuth) {
     const userId = req.user.id;
     const user = await User.findById(userId);
+    var taiou = {};
+    knex("users")
+      .distinct('id')
+      .select("*")
+      .then(async function (results){
+        
+        for(let r of results)
+        {
+         
+          taiou[r.id] = r.name;
+          
+        }
+      })
 
     knex("tasks")
       .select("*")
-      .where({user_id: userId})
-      .then(function (results) {
-        
+      //.where({user_id: userId})
+      .then(async function (results) {
         res.render('index', {
           title: 'ToDo App',
           todos: results,
           isAuth: isAuth,
-          name: req.user.name, 
-          test: user.name,
+          n: req.user.name, 
+          taiou: taiou,
         });
       })
       .catch(function (err) {
